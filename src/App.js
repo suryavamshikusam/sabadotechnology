@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { InfiniteGrid } from './components/ui/InfiniteGrid';
 
-function App() {
+export default function App() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="hero" style={{ pointerEvents: 'auto' }}>
+      <InfiniteGrid />
+
+      <div className={`brand-row ${visible ? 'brand-visible' : ''}`}>
+        <div className="logo-wrapper">
+          <img src="/logo.png" alt="ST Logo" draggable="false" />
+        </div>
+        <div className="company-img-wrapper">
+          <img
+            src="/company.png"
+            alt="Sabado Technologies"
+            className="company-img"
+            draggable="false"
+          />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default App;

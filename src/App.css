@@ -1,38 +1,103 @@
-.App {
-  text-align: center;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, #deeefa 0%, #eef6fd 40%, #f6fbff 70%, #ffffff 100%);
 }
 
-.App-logo {
-  height: 40vmin;
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transform: scale(0.82) translateY(16px);
+  transition: opacity 1.8s ease, transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.brand-row.brand-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.logo-wrapper {
+  width: 220px;
+  height: 220px;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 8px 40px rgba(30,100,180,0.12), 0 2px 12px rgba(180,215,245,0.4);
+}
+
+.logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.logo-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -20%; left: -80%;
+  width: 60%; height: 140%;
+  background: linear-gradient(105deg,
+    transparent 0%, rgba(255,255,255,0) 30%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0) 70%, transparent 100%);
+  transform: skewX(-15deg);
+  filter: blur(6px);
+  animation: reflectionSweep 4s ease-in-out 1.5s infinite;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.company-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+  width: auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.company-img-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -20%; left: -80%;
+  width: 60%; height: 140%;
+  background: linear-gradient(105deg,
+    transparent 0%, rgba(255,255,255,0) 30%,
+    rgba(255,255,255,0.18) 50%,
+    rgba(255,255,255,0) 70%, transparent 100%);
+  transform: skewX(-15deg);
+  filter: blur(6px);
+  animation: reflectionSweep 4s ease-in-out 2.5s infinite;
+  pointer-events: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.company-img {
+  height: 220px;
+  width: auto;
+  display: block;
+  mix-blend-mode: multiply;
+  filter: brightness(1.08);
+}
+
+@keyframes reflectionSweep {
+  0%   { transform: skewX(-15deg) translateX(0%); }
+  100% { transform: skewX(-15deg) translateX(290%); }
 }
